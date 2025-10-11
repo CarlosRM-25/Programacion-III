@@ -1,0 +1,156 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Producto
+{
+    public string Codigo { get; set; }
+    public string Nombre { get; set; }
+    public decimal Precio { get; set; }
+    public int Stock { get; set; }
+}
+
+class ProgramaInventario
+{
+    static List<Producto> inventario = new List<Producto>();
+
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("\n=== ELECTROMARKET ===");
+            Console.WriteLine("1. Agregar producto");
+            Console.WriteLine("2. Ajustar stock");
+            Console.WriteLine("3. Eliminar producto");
+            Console.WriteLine("4. Listar productos");
+            Console.WriteLine("5. Buscar producto");
+            Console.WriteLine("6. Salir");
+            Console.Write("Seleccione una opción: ");
+            string opcion = Console.ReadLine();
+
+            switch (opcion)
+            {
+                case "1": Agregar(); break;
+                case "2": Ajustar(); break;
+                case "3": Eliminar(); break;
+                case "4": Listar(); break;
+                case "5": Buscar(); break;
+                case "6": return;
+                default: Console.WriteLine("Opción inválida."); break;
+            }
+        }
+    }
+
+    static void Agregar()
+    {
+        Console.Write("Código: ");
+        string codigo = Console.ReadLine()?.Trim();
+        if (string.IsNullOrEmpty(codigo)) { Console.WriteLine("Código no puede estar vacío."); return; }
+
+        if (inventario.Any(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase)))
+        {
+            Console.WriteLine("El código ya existe.");
+            return;
+        }
+
+        Console.Write("Nombre: ");
+        string nombre = Console.ReadLine()?.Trim();
+        if (string.IsNullOrEmpty(nombre)) { Console.WriteLine("Nombre no puede estar vacío."); return; }
+
+        Console.Write("Precio: ");
+        if (!decimal.TryParse(Console.ReadLine(), out decimal precio) || precio < 0)
+        {
+            Console.WriteLine("Precio inválido.");
+            return;
+        }
+
+        Console.Write("Stock: ");
+        if (!int.TryParse(Console.ReadLine(), out int stock) || stock < 0)
+        {
+            Console.WriteLine("Stock inválido.");
+            return;
+        }
+
+        inventario.Add(new Producto { Codigo = codigo, Nombre = nombre, Precio = precio, Stock = stock });
+        Console.WriteLine("Producto agregado correctamente.");
+    }
+
+    static void Ajustar()
+    {
+        Console.Write("Código: ");
+        string codigo = Console.ReadLine()?.Trim();
+
+        var prod = inventario.FirstOrDefault(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
+        if (prod == null)
+        {
+            Console.WriteLine("Producto no encontrado.");
+            return;
+        }
+
+        Console.Write("Ajuste de stock (+/-): ");
+        if (!int.TryParse(Console.ReadLine(), out int delta))
+        {
+            Console.WriteLine("Valor inválido.");
+            return;
+        }
+
+        int nuevoStock = prod.Stock + delta;
+        if (nuevoStock < 0)
+        {
+            Console.WriteLine("Error: el stock no puede quedar negativo.");
+            return;
+        }
+
+        prod.Stock = nuevoStock;
+        Console.WriteLine($"Stock actualizado. Nuevo stock: {prod.Stock}");
+    }
+
+    static void Eliminar()
+    {
+        Console.Write("Código a eliminar: ");
+        string codigo = Console.ReadLine()?.Trim();
+
+        var prod = inventario.FirstOrDefault(p => p.Codigo.Equals(codigo, StringComparison.OrdinalIgnoreCase));
+        if (prod == null)
+        {
+            Console.WriteLine("Producto no encontrado.");
+            return;
+        }
+
+        inventario.Remove(prod);
+        Console.WriteLine("Producto eliminado correctamente.");
+    }
+
+    static void Listar()
+    {
+        if (inventario.Count == 0)
+        {
+            Console.WriteLine("Inventario vacío.");
+            return;
+        }
+
+        Console.WriteLine("\nCódigo | Nombre | Precio | Stock");
+        foreach (var p in inventario)
+            Console.WriteLine($"{p.Codigo} | {p.Nombre} | {p.Precio} | {p.Stock}");
+    }
+
+    static void Buscar()
+    {
+        Console.Write("Buscar nombre (parcial): ");
+        string criterio = Console.ReadLine()?.Trim().ToLower();
+
+        var resultados = inventario
+            .Where(p => p.Nombre.ToLower().Contains(criterio))
+            .ToList();
+
+        if (resultados.Count == 0)
+        {
+            Console.WriteLine("No se encontraron coincidencias.");
+            return;
+        }
+
+        Console.WriteLine("\nCódigo | Nombre | Precio | Stock");
+        foreach (var p in resultados)
+            Console.WriteLine($"{p.Codigo} | {p.Nombre} | {p.Precio} | {p.Stock}");
+    }
+}

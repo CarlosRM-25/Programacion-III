@@ -1,0 +1,49 @@
+ ┌────────────────────────┐
+ │  Inicio                │
+ └───────┬────────────────┘
+         │
+         ▼
+ ┌────────────────────────┐
+ │ Mostrar menú principal │
+ └───────┬────────────────┘
+         │
+         ▼
+ ┌───────────────────────────┐
+ │ Leer opción del usuario   │
+ └───────┬───────────────────┘
+         │
+ ┌───────┼────────────────────────────────────────────┐
+ │       │                                            │
+ ▼       ▼                                            ▼
+Registrar Listar Cola                              Atender
+ │       │                                            │
+ │       ▼                                            ▼
+ │  Mostrar pacientes ordenados            ¿Cola vacía? ───► Sí: "No hay pacientes"
+ │  por prioridad y llegada                No: Atender siguiente
+ │                                          (mostrar nombre y prioridad)
+ │
+ │
+ ▼
+Registrar datos (Nombre, Edad, Motivo, Prioridad)
+ │
+Validar entradas → ¿Datos válidos?
+ │
+ ├──► No: Mostrar error y volver al menú
+ │
+ └──► Sí: Agregar paciente a la cola
+        Mostrar "Paciente X registrado con prioridad P"
+        Volver al menú
+         
+         ▼
+ ┌───────────────────────────┐
+ │ Opción 4 → Mostrar resumen│
+ │ Total y cantidad por P1,P2,P3 │
+ └────────┬──────────────────┘
+          │
+          ▼
+     ¿Salir (opción 5)? ───► Sí
+          │
+          ▼
+      ┌────────────┐
+      │   Fin      │
+      └────────────┘

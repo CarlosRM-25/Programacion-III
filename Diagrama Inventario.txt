@@ -1,0 +1,46 @@
+ ┌────────────────────────┐
+ │   Inicio               │
+ └────────┬───────────────┘
+          │
+          ▼
+ ┌────────────────────────┐
+ │ Mostrar menú principal │
+ └────────┬───────────────┘
+          │
+          ▼
+ ┌───────────────────────────┐
+ │ Leer opción del usuario   │
+ └────────┬──────────────────┘
+          │
+ ┌────────┼──────────────────────────────────────────────────────────┐
+ │        │         │          │          │                          │
+ ▼        ▼         ▼          ▼          ▼                          ▼
+Agregar  Ajustar  Eliminar   Listar     Buscar                    Salir
+ │        │         │          │          │                          │
+ │        │         │          │          │                          │
+ ▼        ▼         ▼          ▼          ▼                          ▼
+Ingresar datos  Buscar código Buscar código Mostrar lista   Pedir nombre parcial
+(Código,        Validar delta Validar existencia Mostrar productos   Coincidencias?
+Nombre, Precio, + o -)        Eliminar si existe     con sus datos   │
+Stock)          Validar stock Validar existencia                   │
+ │              final ≥ 0     Mostrar mensaje                      │
+Validar datos                                                   │
+ │                                                             │
+Datos válidos?                                                  │
+ │                                                             │
+ ├─► No: Mostrar error y volver                                 │
+ │                                                             │
+ └─► Sí: Registrar producto                                    └──► No: "No hay resultados"
+       Mostrar confirmación                                         │
+                                                                    │
+                                                                    └──► Sí: Mostrar lista
+                                                                          
+          ▼
+ ┌────────────────────────┐
+ │ ¿Salir (opción 6)?     │
+ └────────┬───────────────┘
+          │
+          ▼
+      ┌────────────┐
+      │    Fin     │
+      └────────────┘

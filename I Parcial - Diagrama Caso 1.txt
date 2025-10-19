@@ -1,0 +1,47 @@
+┌──────────────────────────┐
+│        INICIO            │
+└────────────┬─────────────┘
+             │
+             ▼
+ ┌──────────────────────────┐
+ │ Mostrar menú principal   │
+ │ (1-Agregar, 2-Listar,    │
+ │  3-Buscar, 4-Sin stock,  │
+ │  5-Salir)                │
+ └────────────┬─────────────┘
+              │
+              ▼
+     ┌─────────────────┐
+     │ Leer opción     │
+     └───────┬─────────┘
+             │
+ ┌───────────┼───────────────────────────┐
+ │           │                           │
+ ▼           ▼                           ▼
+(1)         (2)                         (3)
+Agregar    Listar                     Buscar
+Producto   Productos                  Producto
+ │           │                           │
+ │           ▼                           ▼
+ │   Mostrar lista o msg si vacío   Buscar por código
+ │                                   y mostrar resultado
+ ▼
+Validar precio y cantidad
+(con try-catch)
+ │
+ ▼
+Agregar producto a lista
+ │
+ ▼
+ ┌───────────────┐
+ │ Opción (4)?   │────► Mostrar productos
+ │ Cantidad=0    │      con stock cero
+ └──────┬────────┘
+        │
+        ▼
+ ┌───────────────┐
+ │ Opción (5)?   │────► "Salir del sistema"
+ └──────┬────────┘
+        │
+        ▼
+      Repetir menú

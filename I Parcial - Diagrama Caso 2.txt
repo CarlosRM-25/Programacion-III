@@ -1,0 +1,56 @@
+┌──────────────────────────┐
+│         INICIO           │
+└────────────┬─────────────┘
+             │
+             ▼
+ ┌──────────────────────────┐
+ │ Mostrar menú principal   │
+ │ (1-Registrar persona,    │
+ │  2-Listar personas,      │
+ │  3-Crear cita,           │
+ │  4-Listar citas x persona│
+ │  5-Todas las citas,      │
+ │  6-Salir)                │
+ └────────────┬─────────────┘
+              │
+              ▼
+     ┌─────────────────┐
+     │ Leer opción     │
+     └───────┬─────────┘
+             │
+ ┌───────────┼────────────────────────────────────────┐
+ │           │                    │                   │
+ ▼           ▼                    ▼                   ▼
+(1)         (2)                  (3)                 (4)
+Registrar   Listar              Crear              Listar citas
+persona     personas            cita               por persona
+ │           │                    │                   │
+ │           ▼                    ▼                   ▼
+Validar Id único             Validar PersonaId     Mostrar citas
+(con try-catch)               existente            por PersonaId
+ │                            (try-catch)           o msg vacío
+ ▼
+Agregar persona            Solicitar fecha
+a lista                    y descripción
+ │                            │
+ ▼                            ▼
+Confirmar registro         Agregar cita a lista
+ │                            │
+ └────────────┬───────────────┘
+              │
+              ▼
+     ┌─────────────────────┐
+     │ Opción (5)?         │
+     └───────┬─────────────┘
+              │
+              ▼
+        Mostrar todas
+        las citas
+              │
+              ▼
+     ┌─────────────────────┐
+     │ Opción (6)?         │
+     └───────┬─────────────┘
+              │
+              ▼
+          Fin del sistema

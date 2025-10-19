@@ -1,0 +1,131 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    // Clase para representar un producto
+    class Producto
+    {
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
+        public decimal Precio { get; set; }
+        public int Cantidad { get; set; }
+    }
+
+    static void Main()
+    {
+        List<Producto> inventario = new List<Producto>();
+        string opcion;
+
+        do
+        {
+            Console.WriteLine("\n=== INVENTARIO RÁPIDO - ElectroPlus ===");
+            Console.WriteLine("1. Agregar producto");
+            Console.WriteLine("2. Listar productos");
+            Console.WriteLine("3. Buscar producto por código");
+            Console.WriteLine("4. Mostrar productos con cantidad = 0");
+            Console.WriteLine("5. Salir");
+            Console.Write("Seleccione una opción: ");
+            opcion = Console.ReadLine();
+
+            switch (opcion)
+            {
+                case "1":
+                    AgregarProducto(inventario);
+                    break;
+                case "2":
+                    ListarProductos(inventario);
+                    break;
+                case "3":
+                    BuscarProducto(inventario);
+                    break;
+                case "4":
+                    MostrarSinStock(inventario);
+                    break;
+                case "5":
+                    Console.WriteLine("Saliendo del sistema... ¡Hasta luego!");
+                    break;
+                default:
+                    Console.WriteLine("Opción no válida. Intente nuevamente.");
+                    break;
+            }
+
+        } while (opcion != "5");
+    }
+
+    static void AgregarProducto(List<Producto> inventario)
+    {
+        Producto p = new Producto();
+
+        Console.Write("Código: ");
+        p.Codigo = Console.ReadLine();
+
+        Console.Write("Nombre: ");
+        p.Nombre = Console.ReadLine();
+
+        try
+        {
+            Console.Write("Precio: ");
+            p.Precio = decimal.Parse(Console.ReadLine());
+
+            Console.Write("Cantidad: ");
+            p.Cantidad = int.Parse(Console.ReadLine());
+
+            inventario.Add(p);
+            Console.WriteLine("✅ Producto agregado correctamente.");
+        }
+        catch
+        {
+            Console.WriteLine("⚠️ Entrada inválida. Asegúrese de ingresar valores numéricos en Precio y Cantidad.");
+        }
+    }
+
+    static void ListarProductos(List<Producto> inventario)
+    {
+        Console.WriteLine("\n--- LISTA DE PRODUCTOS ---");
+        if (inventario.Count == 0)
+        {
+            Console.WriteLine("No hay productos registrados.");
+            return;
+        }
+
+        foreach (var p in inventario)
+        {
+            Console.WriteLine($"{p.Codigo}|{p.Nombre}|{p.Precio}|{p.Cantidad}");
+        }
+    }
+
+    static void BuscarProducto(List<Producto> inventario)
+    {
+        Console.Write("Ingrese el código del producto a buscar: ");
+        string codigo = Console.ReadLine();
+
+        var encontrado = inventario.Find(p => p.Codigo == codigo);
+
+        if (encontrado != null)
+        {
+            Console.WriteLine($"✅ Producto encontrado: {encontrado.Codigo}|{encontrado.Nombre}|{encontrado.Precio}|{encontrado.Cantidad}");
+        }
+        else
+        {
+            Console.WriteLine("⚠️ No se encontró un producto con ese código.");
+        }
+    }
+
+    static void MostrarSinStock(List<Producto> inventario)
+    {
+        Console.WriteLine("\n--- PRODUCTOS SIN STOCK ---");
+        var sinStock = inventario.FindAll(p => p.Cantidad == 0);
+
+        if (sinStock.Count == 0)
+        {
+            Console.WriteLine("Todos los productos tienen stock disponible.");
+            return;
+        }
+
+        foreach (var p in sinStock)
+        {
+            Console.WriteLine($"{p.Codigo}|{p.Nombre}|{p.Precio}|{p.Cantidad}");
+        }
+    }
+}

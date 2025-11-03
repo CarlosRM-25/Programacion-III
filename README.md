@@ -53,5 +53,5 @@ Al enviar el formulario, los datos se guardan en una lista temporal (en memoria)
 
 ---
 
-## 🧱 Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
